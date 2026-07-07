@@ -32,7 +32,7 @@ sba explain <filePath> [--no-cache]
 ## Phase 0 — 스캐폴딩
 
 - [x] 0.1 `chore: init project` — npm init, TypeScript(strict) 설정, 디렉터리 구조(`src/cli`, `src/parser`, `src/index`(인덱스 도메인), `src/graph`, `src/ai`), `.gitignore`
-- [ ] 0.2 `chore: add lint, format, test tooling` — ESLint + Prettier + vitest 설정, `npm run lint/test/build` 스크립트
+- [x] 0.2 `chore: add lint, format, test tooling` — ESLint + Prettier + vitest 설정, `npm run lint/test/build` 스크립트
 - [ ] 0.3 `feat: add CLI skeleton` — commander로 `scan`/`deps`/`explain` 서브커맨드 스텁(옵션 파싱까지, 본문은 TODO), `bin` 필드 등록
 - [ ] 0.4 `chore: add CI` — GitHub Actions에서 lint + test + build
 
