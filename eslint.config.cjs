@@ -10,7 +10,7 @@ module.exports = tseslint.config(
   },
   eslint.configs.recommended,
   {
-    files: ['*.config.js', '*.config.ts'],
+    files: ['*.config.js', '*.config.cjs', '*.config.ts'],
     languageOptions: {
       globals: globals.node,
     },
