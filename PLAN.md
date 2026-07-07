@@ -39,7 +39,7 @@ sba explain <filePath> [--no-cache]
 ## Phase 1 — tree-sitter 파서
 
 - [x] 1.1 `feat: setup tree-sitter runtime` — web-tree-sitter 초기화, Kotlin/Java WASM 문법 로드 유틸, 확장자 기반 언어 선택
-- [ ] 1.2 `test: add parser fixtures` — 테스트용 Kotlin/Java 샘플 파일 세트 작성 (class/interface/enum, 어노테이션, 주 생성자 주입, extends/implements, 제네릭·널러블 타입 포함)
+- [x] 1.2 `test: add parser fixtures` — 테스트용 Kotlin/Java 샘플 파일 세트 작성 (class/interface/enum, 어노테이션, 주 생성자 주입, extends/implements, 제네릭·널러블 타입 포함)
 - [ ] 1.3 `feat: extract class declarations (kotlin)` — 파일에서 클래스/인터페이스/enum 선언 추출: 이름, 패키지, 어노테이션 목록
 - [ ] 1.4 `feat: extract constructor params and imports (kotlin)` — 주 생성자 파라미터의 이름·타입, import 목록 추출
 - [ ] 1.5 `feat: extract inheritance (kotlin)` — extends / implements 대상 추출 (Kotlin은 `:` 뒤 supertype 목록에서 분리)
