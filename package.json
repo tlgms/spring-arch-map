@@ -1,0 +1,36 @@
+{
+  "name": "sba",
+  "version": "0.1.0",
+  "description": "Spring Boot Analyzer — Spring Boot(Java/Kotlin) 프로젝트를 분석해 클래스 구조/의존성 그래프를 생성하고 AI로 파일 역할을 설명하는 CLI",
+  "main": "dist/cli/index.js",
+  "bin": {
+    "sba": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "keywords": [
+    "spring-boot",
+    "kotlin",
+    "java",
+    "architecture",
+    "cli"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tlgms/spring-arch-map.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tlgms/spring-arch-map/issues"
+  },
+  "homepage": "https://github.com/tlgms/spring-arch-map#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "typescript": "^6.0.3"
+  }
+}
