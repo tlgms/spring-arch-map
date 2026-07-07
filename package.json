@@ -45,6 +45,7 @@
     "vitest": "^4.1.10"
   },
   "dependencies": {
-    "commander": "^15.0.0"
+    "commander": "^15.0.0",
+    "web-tree-sitter": "^0.24.7"
   }
 }
