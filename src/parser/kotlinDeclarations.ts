@@ -2,14 +2,20 @@ import type Parser from 'web-tree-sitter';
 
 export type DeclarationKind = 'class' | 'interface' | 'enum';
 
+export interface ConstructorParam {
+  name: string;
+  type: string;
+}
+
 export interface KotlinDeclaration {
   name: string;
   packageName: string;
   kind: DeclarationKind;
   annotations: string[];
+  constructorParams: ConstructorParam[];
 }
 
-function joinIdentifierParts(identifierNode: Parser.SyntaxNode): string {
+export function joinIdentifierParts(identifierNode: Parser.SyntaxNode): string {
   return identifierNode.namedChildren
     .filter((child) => child.type === 'simple_identifier')
     .map((child) => child.text)
@@ -61,6 +67,31 @@ function extractAnnotations(classDeclarationNode: Parser.SyntaxNode): string[] {
   return annotations;
 }
 
+function extractConstructorParams(classDeclarationNode: Parser.SyntaxNode): ConstructorParam[] {
+  const primaryConstructor = classDeclarationNode.namedChildren.find(
+    (child) => child.type === 'primary_constructor',
+  );
+  if (!primaryConstructor) {
+    return [];
+  }
+
+  const params: ConstructorParam[] = [];
+  for (const paramNode of primaryConstructor.namedChildren) {
+    if (paramNode.type !== 'class_parameter') {
+      continue;
+    }
+    const named = paramNode.namedChildren;
+    const nameIndex = named.findIndex((child) => child.type === 'simple_identifier');
+    const nameNode = named[nameIndex];
+    const typeNode = named[nameIndex + 1];
+    if (!nameNode || !typeNode) {
+      continue;
+    }
+    params.push({ name: nameNode.text, type: typeNode.text });
+  }
+  return params;
+}
+
 export function extractKotlinDeclarations(tree: Parser.Tree): KotlinDeclaration[] {
   const rootNode = tree.rootNode;
   const packageName = extractPackageName(rootNode);
@@ -75,6 +106,7 @@ export function extractKotlinDeclarations(tree: Parser.Tree): KotlinDeclaration[
       packageName,
       kind: extractDeclarationKind(child),
       annotations: extractAnnotations(child),
+      constructorParams: extractConstructorParams(child),
     });
   }
   return declarations;

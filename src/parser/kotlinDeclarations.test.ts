@@ -28,6 +28,10 @@ describe('extractKotlinDeclarations', () => {
         packageName: 'com.example.demo.service',
         kind: 'class',
         annotations: ['Service'],
+        constructorParams: [
+          { name: 'userRepository', type: 'UserRepository' },
+          { name: 'notifier', type: 'Notifier?' },
+        ],
       },
     ]);
   });
@@ -42,6 +46,7 @@ describe('extractKotlinDeclarations', () => {
         packageName: 'com.example.demo.repository',
         kind: 'interface',
         annotations: [],
+        constructorParams: [],
       },
     ]);
   });
@@ -56,6 +61,7 @@ describe('extractKotlinDeclarations', () => {
         packageName: 'com.example.demo.domain',
         kind: 'enum',
         annotations: [],
+        constructorParams: [],
       },
     ]);
   });
