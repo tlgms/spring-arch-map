@@ -51,7 +51,7 @@ sba explain <filePath> [--no-cache]
 - [x] 2.1 `feat: define index schema` — `ClassInfo`(fqName, kind, stereotype, dependencies, extends, implements, filePath) 및 `ProjectIndex` 타입 + JSON 직렬화/역직렬화
 - [x] 2.2 `feat: project scanner` — `src/main/kotlin|java` 탐색, 파일 워킹, 파일별 파싱 결과 수집 (Gradle 멀티모듈 대응: 하위 모듈의 src/main도 탐색)
 - [x] 2.3 `feat: resolve type references` — 생성자 파라미터 타입 → FQName 해석: ① import 매칭 ② 동일 패키지 탐색 ③ 제네릭/널러블 벗기기(`List<X>`, `X?` → `X`) ④ 미해석 타입은 external로 마킹
-- [ ] 2.4 `feat: classify stereotypes` — Spring 어노테이션(@RestController, @Service, @Repository, @Component, @Configuration) + 패키지 컨벤션(`port`, `adapter`, `domain`, `usecase`) 기반 분류
+- [x] 2.4 `feat: classify stereotypes` — Spring 어노테이션(@RestController, @Service, @Repository, @Component, @Configuration) + 패키지 컨벤션(`port`, `adapter`, `domain`, `usecase`) 기반 분류
 - [ ] 2.5 `feat: implement scan command` — 위 전부를 연결해 `.sba/index.json` 생성, 요약 출력(클래스 수, stereotype 분포)
 - [ ] 2.6 `test: scan integration test` — 픽스처 미니 프로젝트에 대해 인덱스 스냅샷 테스트
 

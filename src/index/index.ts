@@ -15,3 +15,4 @@ export {
   type ResolvedDependency,
   type ResolvedDeclaration,
 } from './resolveReferences.js';
+export { classifyStereotype, type StereotypeInput } from './classifyStereotype.js';
