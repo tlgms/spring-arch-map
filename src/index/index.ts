@@ -8,3 +8,4 @@ export {
   type ClassInfo,
   type ProjectIndex,
 } from './schema.js';
+export { scanProject, type ScanResult } from './scanner.js';
