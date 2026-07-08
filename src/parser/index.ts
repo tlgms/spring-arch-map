@@ -12,3 +12,9 @@ export {
 export { extractKotlinImports } from './kotlinImports.js';
 export { extractJavaDeclarations, type JavaDeclaration } from './javaDeclarations.js';
 export { extractJavaImports } from './javaImports.js';
+export {
+  parseFile,
+  type Dependency,
+  type DeclarationInfo,
+  type ParsedFile,
+} from './parseFile.js';

@@ -44,7 +44,7 @@ sba explain <filePath> [--no-cache]
 - [x] 1.4 `feat: extract constructor params and imports (kotlin)` — 주 생성자 파라미터의 이름·타입, import 목록 추출
 - [x] 1.5 `feat: extract inheritance (kotlin)` — extends / implements 대상 추출 (Kotlin은 `:` 뒤 supertype 목록에서 분리)
 - [x] 1.6 `feat: java parser parity` — 1.3~1.5와 동일한 추출을 Java 문법으로 구현 (필드 주입 `@Autowired` 필드도 의존성으로 수집)
-- [ ] 1.7 `refactor: unify parser output` — 언어와 무관한 `ParsedFile` 타입으로 출력 통일
+- [x] 1.7 `refactor: unify parser output` — 언어와 무관한 `ParsedFile` 타입으로 출력 통일
 
 ## Phase 2 — 인덱스 & 참조 해석
 
