@@ -5,6 +5,14 @@ import { describe, expect, it } from 'vitest';
 import { createParserForFile } from './treeSitterRuntime.js';
 import { extractKotlinDeclarations } from './kotlinDeclarations.js';
 
+async function parseSource(fileName: string, source: string) {
+  const parser = await createParserForFile(fileName);
+  if (!parser) {
+    throw new Error(`no parser for ${fileName}`);
+  }
+  return parser.parse(source);
+}
+
 const FIXTURES_DIR = path.resolve(fileURLToPath(import.meta.url), '..', 'fixtures', 'kotlin');
 
 async function parseFixture(fileName: string) {
@@ -32,6 +40,8 @@ describe('extractKotlinDeclarations', () => {
           { name: 'userRepository', type: 'UserRepository' },
           { name: 'notifier', type: 'Notifier?' },
         ],
+        extends: 'BaseService',
+        implements: ['UserOperations'],
       },
     ]);
   });
@@ -47,6 +57,8 @@ describe('extractKotlinDeclarations', () => {
         kind: 'interface',
         annotations: [],
         constructorParams: [],
+        extends: null,
+        implements: [],
       },
     ]);
   });
@@ -62,7 +74,20 @@ describe('extractKotlinDeclarations', () => {
         kind: 'enum',
         annotations: [],
         constructorParams: [],
+        extends: null,
+        implements: [],
       },
     ]);
+  });
+
+  it('extends 없이 implements만 있으면 여러 인터페이스를 배열로 추출한다', async () => {
+    const tree = await parseSource(
+      'Multi.kt',
+      'class Multi : Runnable, Comparable<Multi> {\n}\n',
+    );
+    const [declaration] = extractKotlinDeclarations(tree);
+
+    expect(declaration?.extends).toBeNull();
+    expect(declaration?.implements).toEqual(['Runnable', 'Comparable']);
   });
 });

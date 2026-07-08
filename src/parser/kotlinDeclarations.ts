@@ -13,6 +13,8 @@ export interface KotlinDeclaration {
   kind: DeclarationKind;
   annotations: string[];
   constructorParams: ConstructorParam[];
+  extends: string | null;
+  implements: string[];
 }
 
 export function joinIdentifierParts(identifierNode: Parser.SyntaxNode): string {
@@ -92,6 +94,34 @@ function extractConstructorParams(classDeclarationNode: Parser.SyntaxNode): Cons
   return params;
 }
 
+interface Delegations {
+  extends: string | null;
+  implements: string[];
+}
+
+function extractDelegations(classDeclarationNode: Parser.SyntaxNode): Delegations {
+  let extendsClass: string | null = null;
+  const implementsInterfaces: string[] = [];
+
+  for (const child of classDeclarationNode.namedChildren) {
+    if (child.type !== 'delegation_specifier') {
+      continue;
+    }
+    const specifier = child.namedChild(0);
+    const typeIdentifier = specifier?.descendantsOfType('type_identifier')[0];
+    if (!typeIdentifier) {
+      continue;
+    }
+    if (specifier.type === 'constructor_invocation') {
+      extendsClass = typeIdentifier.text;
+    } else {
+      implementsInterfaces.push(typeIdentifier.text);
+    }
+  }
+
+  return { extends: extendsClass, implements: implementsInterfaces };
+}
+
 export function extractKotlinDeclarations(tree: Parser.Tree): KotlinDeclaration[] {
   const rootNode = tree.rootNode;
   const packageName = extractPackageName(rootNode);
@@ -107,6 +137,7 @@ export function extractKotlinDeclarations(tree: Parser.Tree): KotlinDeclaration[
       kind: extractDeclarationKind(child),
       annotations: extractAnnotations(child),
       constructorParams: extractConstructorParams(child),
+      ...extractDelegations(child),
     });
   }
   return declarations;
