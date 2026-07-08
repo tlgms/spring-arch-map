@@ -9,3 +9,9 @@ export {
   type ProjectIndex,
 } from './schema.js';
 export { scanProject, type ScanResult } from './scanner.js';
+export {
+  resolveTypeReferences,
+  stripToBaseTypeName,
+  type ResolvedDependency,
+  type ResolvedDeclaration,
+} from './resolveReferences.js';
