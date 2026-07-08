@@ -16,3 +16,9 @@ export {
   type ResolvedDeclaration,
 } from './resolveReferences.js';
 export { classifyStereotype, type StereotypeInput } from './classifyStereotype.js';
+export {
+  buildProjectIndex,
+  getIndexFilePath,
+  writeIndexFile,
+} from './buildProjectIndex.js';
+export { summarizeIndex, type IndexSummary } from './summarize.js';
