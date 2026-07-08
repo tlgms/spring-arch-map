@@ -10,3 +10,5 @@ export {
   type KotlinDeclaration,
 } from './kotlinDeclarations.js';
 export { extractKotlinImports } from './kotlinImports.js';
+export { extractJavaDeclarations, type JavaDeclaration } from './javaDeclarations.js';
+export { extractJavaImports } from './javaImports.js';
