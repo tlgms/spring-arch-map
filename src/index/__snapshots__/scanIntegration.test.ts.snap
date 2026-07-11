@@ -1,0 +1,79 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`scan integration > 픽스처 미니 프로젝트를 스캔한 인덱스가 스냅샷과 일치한다 1`] = `
+{
+  "classes": [
+    {
+      "dependencies": [],
+      "extends": null,
+      "filePath": "src/main/kotlin/com/example/adapter/UserRepositoryImpl.kt",
+      "fqName": "com.example.adapter.UserRepositoryImpl",
+      "implements": [
+        "UserRepository",
+      ],
+      "kind": "class",
+      "stereotype": "Repository",
+    },
+    {
+      "dependencies": [
+        {
+          "name": "id",
+          "rawType": "Long",
+          "resolvedFqName": null,
+        },
+        {
+          "name": "name",
+          "rawType": "String",
+          "resolvedFqName": null,
+        },
+      ],
+      "extends": null,
+      "filePath": "src/main/kotlin/com/example/domain/User.kt",
+      "fqName": "com.example.domain.User",
+      "implements": [],
+      "kind": "class",
+      "stereotype": "Domain",
+    },
+    {
+      "dependencies": [],
+      "extends": null,
+      "filePath": "src/main/kotlin/com/example/port/UserRepository.kt",
+      "fqName": "com.example.port.UserRepository",
+      "implements": [],
+      "kind": "interface",
+      "stereotype": "Port",
+    },
+    {
+      "dependencies": [
+        {
+          "name": "userRepository",
+          "rawType": "UserRepository",
+          "resolvedFqName": "com.example.port.UserRepository",
+        },
+      ],
+      "extends": null,
+      "filePath": "src/main/kotlin/com/example/service/UserService.kt",
+      "fqName": "com.example.service.UserService",
+      "implements": [],
+      "kind": "class",
+      "stereotype": "Service",
+    },
+    {
+      "dependencies": [
+        {
+          "name": "userService",
+          "rawType": "UserService",
+          "resolvedFqName": "com.example.service.UserService",
+        },
+      ],
+      "extends": null,
+      "filePath": "src/main/java/com/example/web/UserController.java",
+      "fqName": "com.example.web.UserController",
+      "implements": [],
+      "kind": "class",
+      "stereotype": "RestController",
+    },
+  ],
+  "schemaVersion": 1,
+}
+`;
