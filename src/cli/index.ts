@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
+import { buildProjectIndex, summarizeIndex, writeIndexFile } from '../index/index.js';
 
 const program = new Command();
 
@@ -9,9 +10,22 @@ program
   .command('scan')
   .description('프로젝트 파싱 → .sba/index.json 생성')
   .argument('<projectPath>', '분석할 Spring Boot 프로젝트 경로')
-  .action((projectPath: string) => {
-    // TODO: Phase 2에서 구현
-    console.log('TODO: scan', projectPath);
+  .action(async (projectPath: string) => {
+    try {
+      const index = await buildProjectIndex(projectPath);
+      const outputPath = await writeIndexFile(projectPath, index);
+      const summary = summarizeIndex(index);
+
+      console.log(`스캔 완료: 클래스 ${String(summary.totalClasses)}개`);
+      console.log('Stereotype 분포:');
+      for (const [stereotype, count] of Object.entries(summary.byStereotype)) {
+        console.log(`  ${stereotype}: ${String(count)}`);
+      }
+      console.log(`인덱스 파일: ${outputPath}`);
+    } catch (error) {
+      console.error(`스캔 실패: ${error instanceof Error ? error.message : String(error)}`);
+      process.exitCode = 1;
+    }
   });
 
 program
